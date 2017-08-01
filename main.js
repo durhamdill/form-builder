@@ -102,6 +102,8 @@ let fieldsDiv = document.querySelector("#fields");
 function buildForm() {
 for (let object=0; object<formData.length; object++) {
 
+  // SELECT: create if statement to find and build select field
+
   if (formData[object].type === "select") {
     // create select field and add attributes
     let select = document.createElement("select");
@@ -110,11 +112,15 @@ for (let object=0; object<formData.length; object++) {
     select.setAttribute("placeholder", formData[object].label);
     fieldsDiv.appendChild(select);
 
-    // create loop to run through options array and convert each object to an option node
+    // create first option to make Select Language text appear in select field
+
+
     let firstOption = document.createElement("option");
     let firstOptionText = document.createTextNode("Select language...");
     firstOption.appendChild(firstOptionText);
     select.appendChild(firstOption);
+
+    // create loop to run through options array and convert each object to an option node
 
     for (let x=0; x<formData[object].options.length; x++) {
 
@@ -126,10 +132,9 @@ for (let object=0; object<formData.length; object++) {
       option.setAttribute("placeholder", formData[object].options[x].label);
       select.appendChild(option);
 
-      // assign new option choices to parent
     }
     }
-
+  // TEXTAREA: create else if statement to find and build textarea field
     else if (formData[object].type === "textarea"){
       let textarea = document.createElement("textarea");
       textarea.setAttribute("type", formData[object].type);
@@ -138,8 +143,7 @@ for (let object=0; object<formData.length; object++) {
       fieldsDiv.appendChild(textarea);
     }
     else {
-
-    // create input item/field
+  // INPUT: create else statement to find and build remaining input fields
     let input = document.createElement("input");
 
     // add attributes to each input
